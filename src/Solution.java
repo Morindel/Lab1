@@ -1,31 +1,35 @@
 
 public class Solution  {
 	
-
+	private double x1 , x2;
+	private double p , q;
 	
-
-	public void setA(Polynomial obj, double a) {
-		obj.a = a;
+	public double getX1() {
+		return x1;
 	}
-
-
-	public void setB(Polynomial obj, double b) {
-		obj.b = b;
-	}
-
-	public void setC(Polynomial obj, double c) {
-		obj.c = c;
+	public void setX1(double x1) {
+		this.x1 = x1;
 	}
 	
-	public double  getA(Polynomial obj) {
-		return obj.a;
+	public double getX2() {
+		return x2;
 	}
-
-	public double getB(Polynomial obj) {
-		return obj.b;
+	public void setX2(double x2) {
+		this.x2 = x2;
 	}
-	public double  getC(Polynomial obj){
-		return obj.c;
+	
+	public double getP() {
+		return p;
+	}
+	public void setP(double p) {
+		this.p = p;
+	}
+	
+	public double getQ() {
+		return q;
+	}
+	public void setQ(double q) {
+		this.q = q;
 	}
 	
 

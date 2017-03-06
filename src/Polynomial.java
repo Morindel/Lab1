@@ -1,21 +1,33 @@
 
 public class Polynomial {
-		protected double a;
-		protected double b;
-		protected double c;	
-		protected double delta;
-		protected double x1;
-		protected double x2;
+		private double a, b, c;
+		private double delta;
+	
+		private boolean zero , jeden , dwa , infi ;
 		
-		protected boolean zero;
-		protected boolean jeden;
-		protected boolean dwa;
-		protected boolean infi;
 		
-		protected double p;
-		protected double q;
-		
-		Solution s1 = new Solution();
+		public double getDelta() {
+			return delta;
+		}
+
+		public boolean isZero() {
+			return zero;
+		}
+
+		public boolean isJeden() {
+			return jeden;
+		}
+
+		public boolean isDwa() {
+			return dwa;
+		}
+
+		public boolean isInfi() {
+			return infi;
+		}
+
+
+		private Solution s1 = new Solution();
 		
 	
 		Polynomial(double b,double c)
@@ -34,48 +46,52 @@ public class Polynomial {
 		}
 		
 		public void mZerowe(){
-			if (s1.getA(this)==0)
+			if ( a == 0)
 			{
-				if(s1.getB(this)==0 && !(s1.getC(this)==0))
+				if( b == 0 && !(c==0))
 				{
 					this.zero = true;
 					return;
 				}
-				else if(s1.getB(this)==0 && (s1.getC(this)==0))
+				else if( b == 0 && c == 0)
 				{
 					this.infi = true;
 					return;
 				}
 				this.jeden = true;
-				x1 = (-s1.getC(this)) / s1.getB(this);
+				s1.setX1( - b / c ) ;
 			}
 			else
 			{	
-				delta =  s1.getB(this)*s1.getB(this) - 4 * s1.getC(this) * s1.getA(this);
+				delta =  b*b - 4 * a * c;
 				
 				Check();//Sprawdzianie ilosci rozwiazan
 		
-				p = ( -s1.getB(this) )/ (2 * s1.getA(this));
-				q = ( -delta ) / (4 * s1.getA(this));
+				s1.setP( -b /( 2 * a) );
+				s1.setQ( -delta  / (4 * a));
 			
-				if(zero==true){
+				if(zero == true)
+				{
 				}
 
-				if(jeden==true){
-					x1 = ( -s1.getB(this)) / (2 * s1.getA(this));
+				else if(jeden == true)
+				{
+					s1.setX1( ( -b ) / (2 * a) );
 				}
 			
-				if(dwa==true){
-					x1 = ( -s1.getB(this) - Math.sqrt(delta)) / (2 * s1.getA(this));
-					x2 = ( -s1.getB(this) + Math.sqrt(delta)) / (2 * s1.getA(this)); 
+				else if(dwa == true)
+				{
+					s1.setX1( (-b - Math.sqrt(delta)) / (2 * a));
+					s1.setX2( (-b + Math.sqrt(delta)) / (2 * a)); 
 				}
 			}
 		}
-		public void Check()	{
+		public void Check()
+		{
 		
-			if (delta<0)
+			if (delta < 0)
 				this.zero = true;
-			else if (delta>0)
+			else if (delta > 0)
 				this.dwa = true;
 			else if (delta == 0)
 				this.jeden = true;
@@ -86,41 +102,46 @@ public class Polynomial {
 		public String toString(){
 			String str="";
 			StringBuilder strb = new StringBuilder(str);
-			strb.append(" \n Rownanie ma postac : " + s1.getA(this) +"x^2 " + "+" + "(" + + s1.getB(this) + ")" +"y " + "+" + "(" +  s1.getC(this)  + ")"   + " \n") ;
+			strb.append(" \n Rownanie ma postac : " + a  +"x^2 " + "+" + "(" + + b + ")" +"x " + "+" + "(" + c  + ")"   + " \n") ;
 			 
-			if(zero==true){	
+			if(zero == true)
+			{	
 				 strb.append("\n Nie ma miejsc zerowych");
 			}
 			
-			else if(jeden==true){
-				strb.append("\n Jedno miejsca zerowe x1 :  " + x1);
+			else if(jeden == true)
+			{
+				strb.append("\n Jedno miejsca zerowe x1 :  " + s1.getX1());
 			}
 			
-			else if(dwa==true){
-				strb.append("\n Dwa miejsca zerowe x1 : " + x1 + " " + "x2 : " + x2);
+			else if(dwa == true)
+			{
+				strb.append("\n Dwa miejsca zerowe x1 : " + s1.getX1() + " " + "x2 : " + s1.getX2());
 			}
-			else if(infi==true)
+			
+			else if(infi == true)
 			{
 				strb.append("\n Nieskonczonosc miejsc zerowych");
 			}
+			
 			else
 			
 				strb.append("\n nie wyznaczyles miejsc zerowych");
 			
-			if(s1.getA(this) == 0)
+			if( a == 0)
 			{
 
 				str=strb.toString();
 				return str;
 			}
 			
-			if(s1.getA(this)>0)
+			if( a > 0)
 				strb.append("\n Minimum "
 						+ "");
 			else 
 				strb.append("\n Maksimum ");
 				
-			strb.append(" w punktach p = " + p  + " oraz q = "+ q);
+			strb.append(" w punkcie p = " + s1.getP()  + " oraz q = "+ s1.getQ());
 			
 			str=strb.toString();
 			
